@@ -1,36 +1,35 @@
-decryptthis = input("What do you want to decode? (No captitals):  ")
-yorndata = input("Do you want to use the word database? (y/n): ")
+  decrypt = input("What are you trying to decrypt? ")
+  decrypt = decrypt.lower()
 
-
-if yorndata == 'y':
-  print ("\n~~!You are using the database!~~\n")
-
-  decrypt = (decryptthis)
-  words = ('words.txt')
-
-  for i in range(26):
-     word = ''
-     for j in range(len(decrypt)):
-         extract = ord(decrypt[j])-97
-         decrypt_value = ((extract-i) % 26)+97
-         word += chr(decrypt_value)
-            
-     if word in words:
-      print("Decrypted word might be:", word)
-      print("The Key might be:", i, "\n")
-     if word not in words:
-      print ("No entries found")
-      break
-
-if yorndata == 'n':
 
   chars = "abcdefghijklmnopqrstuvwxyz"
   rot1 = str.maketrans(chars, chars[1:]+chars[0])
+  file1 = open('words.txt', 'r')
+  Lines = file1.readlines()
 
-
+  finished = False
   for i in chars:
-    print(decryptthis)
-    decryptthis = decryptthis.translate(rot1)
-
-
+    if finished == True:
+      pass
+    else:
+      correct = 0
+      decrypt = decrypt.translate(rot1)
+      list = (decrypt.split())
+      count = 0
+      length = len(list)
+      # Strips the newline character
+      for line in Lines:
+        count += 1
+        lineword = ((line.strip()))
+        if lineword in list:
+          index = (list.index(lineword))
+          list[index] = lineword
+          correct+=1
+      if correct/length>0.5:
+        finished = True
+        guess = ""
+        for m in list:
+          guess = guess+m+" "
+        print("Finished")
+        print("Our best guess is:", guess)
 
